@@ -10,7 +10,9 @@ dependencies = [
     "datetime (>=5.5)",
     "python-dotenv (>=1.1.0,<2.0.0)",
     "logging (>=0.4.9.6,<0.5.0.0)",
-    "fastapi (>=0.115.12,<0.116.0)"
+    "fastapi (>=0.115.12,<0.116.0)",
+    "humps (>=0.2.2,<0.3.0)",
+    "decouple (>=0.0.7,<0.0.8)"
 ]
 
 [project.scripts]

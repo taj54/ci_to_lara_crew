@@ -996,6 +996,17 @@ files = [
 ]
 
 [[package]]
+name = "decouple"
+version = "0.0.7"
+description = "Decoupling logic"
+optional = false
+python-versions = ">=3.7"
+groups = ["main"]
+files = [
+    {file = "decouple-0.0.7.tar.gz", hash = "sha256:c253c1cc62b76e9720a066f334552548c6de1884bc3bdf456ddb62d61b867b09"},
+]
+
+[[package]]
 name = "deprecation"
 version = "2.1.0"
 description = "A library to handle automated deprecations"
@@ -1848,6 +1859,18 @@ files = [
 
 [package.dependencies]
 pyreadline3 = {version = "*", markers = "sys_platform == \"win32\" and python_version >= \"3.8\""}
+
+[[package]]
+name = "humps"
+version = "0.2.2"
+description = "camelCase converter"
+optional = false
+python-versions = "*"
+groups = ["main"]
+files = [
+    {file = "humps-0.2.2-py2.py3-none-any.whl", hash = "sha256:401de60fd73673b697086ba7c865966751c57b11cce57a37c9eabb3e75938417"},
+    {file = "humps-0.2.2.tar.gz", hash = "sha256:777f7a17f6b20aa9cc078d63b56ebd66532c6b2c88b370f1d596d5205410f67c"},
+]
 
 [[package]]
 name = "hyperframe"
@@ -6381,4 +6404,4 @@ cffi = ["cffi (>=1.11)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10,<=3.13.2"
-content-hash = "a67b16a4e78b0248b67ec590d4f30cbe50a97156441306a31dc7272485458470"
+content-hash = "4fe8f29b4bc84d5f1fdfdc66b7642991cf1a5e822aa5c2aee420b7b16d548aab"

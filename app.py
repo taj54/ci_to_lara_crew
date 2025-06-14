@@ -4,7 +4,7 @@ from src.local_log.log import logger
 from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from src.middleware.token_validator import TokenValidationMiddleware
-# from routers import api
+from src.routers import api
 from dotenv import load_dotenv
 # from decouple import config
 
@@ -44,7 +44,7 @@ app.add_middleware(
     expected_token="ED2M4WSXGKiS3dXPqztNbi3M5YmaRbu7X"
 )
 
-# app.include_router(api.router)
+app.include_router(api.router)
 
 
 def run():
