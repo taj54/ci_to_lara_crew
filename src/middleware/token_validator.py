@@ -1,13 +1,8 @@
-from fastapi import Request, HTTPException
-from starlette.middleware.base import BaseHTTPMiddleware
+from typing import Annotated
 
-class TokenValidationMiddleware(BaseHTTPMiddleware):
-    def __init__(self, app, expected_token: str):
-        super().__init__(app)
-        self.expected_token = expected_token
+from fastapi import Header, HTTPException
 
-    async def dispatch(self, request: Request, call_next):
-        x_token = request.headers.get("x-token")
-        if x_token != self.expected_token:
-            raise HTTPException(status_code=400, detail="X-Token header invalid")
-        return await call_next(request)
+
+async def get_token_header(x_token: Annotated[str, Header()]):
+    if x_token != "ED2M4WSXGKiS3dXPqztNbi3M5YmaRbu7X":
+        raise HTTPException(status_code=400, detail="X-Token header invalid")

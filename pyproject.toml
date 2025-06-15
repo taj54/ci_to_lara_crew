@@ -3,7 +3,7 @@ name = "ci_to_lara_crew"
 version = "0.1.0"
 description = "ci-to-lara-crew using crewAI"
 authors = [{ name = "Taj", email = "tajulislamj200@gmail.com" }]
-requires-python = ">=3.10,<=3.13.2"
+requires-python = ">=3.10.0,<3.12.5"
 dependencies = [
     "crewai[tools]>=0.130.0,<1.0.0",
     "uvicorn (>=0.29.0)",
@@ -12,7 +12,7 @@ dependencies = [
     "logging (>=0.4.9.6,<0.5.0.0)",
     "fastapi (>=0.115.12,<0.116.0)",
     "humps (>=0.2.2,<0.3.0)",
-    "decouple (>=0.0.7,<0.0.8)"
+    "decouple (>=0.0.7,<0.0.8)",
 ]
 
 [project.scripts]
@@ -31,3 +31,6 @@ type = "crew"
 
 [tool.poetry]
 packages = [{ include = "ci_to_lara_crew", from = "src" }]
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.4.0"

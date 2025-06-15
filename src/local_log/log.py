@@ -1,33 +1,49 @@
-import os
+from pathlib import Path
 import logging
 from datetime import date
 
 
 class Log:
+    def __init__(self, log_to_console=False):
+        self.log_to_console = log_to_console
+        self.logger = logging.getLogger("CrewLogger")
+        self.logger.setLevel(logging.DEBUG)
 
-    def __init__(self,):
-        self.LogFunctions = {
-            'info': logging.info,
-            'warning': logging.warning,
-            'error': logging.error,
-            'critical': logging.critical,
-            'debug': logging.debug
+        self.log_functions = {
+            'info': self.logger.info,
+            'warning': self.logger.warning,
+            'error': self.logger.error,
+            'critical': self.logger.critical,
+            'debug': self.logger.debug
         }
-    def InitializeLogging(self):
-        FolderName = "src/storage/logs/"
-        today = date.today().strftime("%d-%m-%Y")
-        FileName = os.path.join(FolderName, f"{today}.log")
-        if not os.path.exists(FolderName):
-            os.makedirs(FolderName)
 
-        logging.basicConfig(filename=FileName, filemode='a',
-                            format='%(asctime)s - %(levelname)s - %(message)s')
+        self._initialize_logging()
 
-    def LogIt(self,level, msg):
-        LogFunc = self.LogFunctions.get(level, logging.error)
-        LogFunc(msg)
-        return print(level, ':', msg)
+    def _initialize_logging(self):
+        log_dir = Path("src/storage/logs")
+        log_dir.mkdir(parents=True, exist_ok=True)
 
-# Initialize logging when the module is imported
-logger = Log()
-logger.InitializeLogging()
+        log_file = log_dir / f"{date.today():%d-%m-%Y}.log"
+
+        file_handler = logging.FileHandler(log_file, mode='a')
+        file_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
+        self.logger.addHandler(file_handler)
+
+        if self.log_to_console:
+            console_handler = logging.StreamHandler()
+            console_handler.setFormatter(logging.Formatter('%(levelname)s - %(message)s'))
+            self.logger.addHandler(console_handler)
+
+        self.logger.debug("Logging initialized.")
+
+    def log(self, level, msg):
+        level = level.lower()
+        log_func = self.log_functions.get(level)
+        if log_func:
+            log_func(msg)
+        else:
+            self.logger.error(f"Invalid log level '{level}' used: {msg}")
+
+
+# Initialize logger instance (and make it available globally)
+logger = Log(log_to_console=True)
