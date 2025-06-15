@@ -8,6 +8,38 @@
 
 ## Project Structure
 
+```
+.
+├── app.py
+├── pyproject.toml
+├── .env.example
+├── knowledge/
+│   └── user_preference.txt
+├── src/
+│   ├── ci_to_lara_crew/
+│   │   ├── crew.py
+│   │   ├── main.py
+│   │   ├── config/
+│   │   │   ├── agents.yaml
+│   │   │   └── tasks.yaml
+│   │   └── tools/
+│   │       └── custom_tool.py
+│   ├── routers/
+│   │   └── api.py
+│   ├── validation/
+│   │   └── migration_validator.py
+│   ├── local_log/
+│   │   └── log.py
+│   ├── factories/
+│   │   └── centralized_crew_factory.py
+│   ├── schemas/
+│   │   └── framework_migration_schema.json
+│   └── storage/
+│       └── logs/
+├── tests/
+│   └── test_migration_validator.py
+```
+
 ---
 
 ## Key Components
