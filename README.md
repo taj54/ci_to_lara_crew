@@ -1,54 +1,115 @@
-# CiToLaraCrew Crew
+# CI to Lara Crew: Project Overview
 
-Welcome to the CiToLaraCrew Crew project, powered by [crewAI](https://crewai.com). This template is designed to help you set up a multi-agent AI system with ease, leveraging the powerful and flexible framework provided by crewAI. Our goal is to enable your agents to collaborate effectively on complex tasks, maximizing their collective intelligence and capabilities.
+## Description
 
-## Installation
+**CI to Lara Crew** is a Python application that leverages CrewAI and FastAPI to facilitate and validate migrations from CodeIgniter (CI) to Laravel (Lara). It features agent-based orchestration, schema-based validation, logging, and an extensible architecture for adding new migration crews and tools.
 
-Ensure you have Python >=3.10 <3.14 installed on your system. This project uses [UV](https://docs.astral.sh/uv/) for dependency management and package handling, offering a seamless setup and execution experience.
+---
 
-First, if you haven't already, install uv:
+## Project Structure
 
-```bash
-pip install uv
+---
+
+## Key Components
+
+### Application Entry Point
+
+- **[app.py](app.py)**  
+  Starts the FastAPI server, loads environment variables, sets up CORS, and includes API routers. Uses token-based middleware for security.
+
+### CrewAI Integration
+
+- **[src/ci_to_lara_crew/crew.py](src/ci_to_lara_crew/crew.py)**  
+  Defines the main Crew class (`CiToLaraCrew`) using CrewAI decorators. Agents and tasks are configured via YAML files:
+  - [agents.yaml](src/ci_to_lara_crew/config/agents.yaml)
+  - [tasks.yaml](src/ci_to_lara_crew/config/tasks.yaml)
+
+- **[src/ci_to_lara_crew/main.py](src/ci_to_lara_crew/main.py)**  
+  CLI entry points for running, training, replaying, and testing the crew.
+
+- **[src/ci_to_lara_crew/tools/custom_tool.py](src/ci_to_lara_crew/tools/custom_tool.py)**  
+  Example of a custom tool for agent use.
+
+### API Layer
+
+- **[src/routers/api.py](src/routers/api.py)**  
+  Exposes a `/ci-lara-ai-converter` endpoint for migration validation and crew execution.
+
+### Validation
+
+- **[src/validation/migration_validator.py](src/validation/migration_validator.py)**  
+  Validates migration requests against a schema ([framework_migration_schema.json](src/schemas/framework_migration_schema.json)). Returns detailed error messages for invalid requests.
+
+### Logging
+
+- **[src/local_log/log.py](src/local_log/log.py)**  
+  Logging utility that writes logs to `src/storage/logs/` and optionally to the console.
+
+### Crew Factory
+
+- **[src/factories/centralized_crew_factory.py](src/factories/centralized_crew_factory.py)**  
+  Dynamically discovers and registers crew classes from the `crews` directory.
+
+### Knowledge & User Preferences
+
+- **[knowledge/user_preference.txt](knowledge/user_preference.txt)**  
+  Stores user-specific preferences and information.
+
+### Testing
+
+- **[tests/test_migration_validator.py](tests/test_migration_validator.py)**  
+  Unit tests for the migration validator.
+
+---
+
+## Configuration
+
+- **Environment Variables:**  
+  Managed via `.env` and `.env.example`.
+
+- **Dependencies:**  
+  Managed with Poetry ([pyproject.toml](pyproject.toml)).  
+  Key dependencies: `crewai`, `fastapi`, `uvicorn`, `python-dotenv`, `humps`, `decouple`.
+
+---
+
+## Usage
+
+### Installation
+
+```sh
+poetry install --no-root
 ```
 
-Next, navigate to your project directory and install the dependencies:
-
-(Optional) Lock the dependencies and install them by using the CLI command:
-```bash
-crewai install
+### Running the Application 
+```sh
+poetry run python [app.py]
 ```
-### Customizing
-
-**Add your `OPENAI_API_KEY` into the `.env` file**
-
-- Modify `src/ci_to_lara_crew/config/agents.yaml` to define your agents
-- Modify `src/ci_to_lara_crew/config/tasks.yaml` to define your tasks
-- Modify `src/ci_to_lara_crew/crew.py` to add your own logic, tools and specific args
-- Modify `src/ci_to_lara_crew/main.py` to add custom inputs for your agents and tasks
-
-## Running the Project
-
-To kickstart your crew of AI agents and begin task execution, run this from the root folder of your project:
-
-```bash
-$ crewai run
+### Running the Crew Locally
+```sh
+poetry run run_crew
+```
+### Testing
+```sh
+poetry run pytest
 ```
 
-This command initializes the ci-to-lara-crew Crew, assembling the agents and assigning them tasks as defined in your configuration.
+## Extending the Project
 
-This example, unmodified, will run the create a `report.md` file with the output of a research on LLMs in the root folder.
+- **Add new crews:**  
+  Place new crew classes in the `src/crews/` directory. The factory will auto-discover and register them.
 
-## Understanding Your Crew
+- **Add new agents/tasks:**  
+  Update the YAML config files in `src/ci_to_lara_crew/config/`.
 
-The ci-to-lara-crew Crew is composed of multiple AI agents, each with unique roles, goals, and tools. These agents collaborate on a series of tasks, defined in `config/tasks.yaml`, leveraging their collective skills to achieve complex objectives. The `config/agents.yaml` file outlines the capabilities and configurations of each agent in your crew.
+- **Add new tools:**  
+  Implement them in `src/ci_to_lara_crew/tools/` and reference them in agent configs.
 
-## Support
+## Authors
 
-For support, questions, or feedback regarding the CiToLaraCrew Crew or crewAI.
-- Visit our [documentation](https://docs.crewai.com)
-- Reach out to us through our [GitHub repository](https://github.com/joaomdmoura/crewai)
-- [Join our Discord](https://discord.com/invite/X4JWnZnxPb)
-- [Chat with our docs](https://chatg.pt/DWjSBZn)
+- Taj (tajulislamj200@gmail.com)
 
-Let's create wonders together with the power and simplicity of crewAI.
+## References
+
+- [CrewAI Documentation](https://docs.crewai.com/)
+- [FastAPI Documentation](https://fastapi.tiangolo.com/)
