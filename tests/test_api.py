@@ -35,7 +35,7 @@ def test_successful_post(monkeypatch, client):
     response = client.post("/ci-lara-ai-converter/run", json=payload)
     assert response.status_code == status.HTTP_200_OK
     assert response.json()["success"] is True
-    assert "Lara8XCrew crew executed successfully." in response.json()["message"]
+    assert "ci2tolara8x crew executed successfully." in response.json()["message"]
 
 
 def test_validator_failure(monkeypatch, client):

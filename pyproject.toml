@@ -3,7 +3,7 @@ name = "ci_to_lara_crew"
 version = "0.1.0"
 description = "ci-to-lara-crew using crewAI"
 authors = ["Taj <tajulislamj200@gmail.com>"]
-packages = [{ include = "ci_to_lara_crew", from = "src" }]
+packages = [{ include = "*", from = "src" }]
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.12.5"
@@ -21,6 +21,9 @@ run_crew       = "crews.main:run"
 train          = "crews.main:train"
 replay         = "crews.main:replay"
 test           = "crews.main:test"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.4.0"
 
 [tool.crewai]
 type = "crew"

@@ -1,7 +1,7 @@
 import importlib.util
 import sys
 import os
-from local_log.log import logger  
+from local_log.log import logger  # Your custom logger
 
 
 class CrewFactory:
@@ -15,7 +15,10 @@ class CrewFactory:
     @classmethod
     def register_crew(cls, name, crew_class):
         if not hasattr(crew_class, "run") or not callable(getattr(crew_class, "run")):
-            logger.log("warning", f"Class '{crew_class.__name__}' does not have a 'run' method. Not registering.")
+            logger.log(
+                "warning",
+                f"Class '{crew_class.__name__}' does not have a 'run' method. Not registering.",
+            )
             return
 
         if name in cls._crews:
@@ -56,8 +59,9 @@ class CrewFactory:
             relative_path = os.path.relpath(root, directory_path)
 
             current_package_path = (
-                base_package_path if relative_path == "." else
-                os.path.join(base_package_path, relative_path).replace(os.sep, ".")
+                base_package_path
+                if relative_path == "."
+                else os.path.join(base_package_path, relative_path).replace(os.sep, ".")
             )
 
             for filename in files:
@@ -65,14 +69,20 @@ class CrewFactory:
                     module_name = filename[:-3]
                     full_module_name = (
                         f"{current_package_path}.{module_name}"
-                        if current_package_path else module_name
+                        if current_package_path
+                        else module_name
                     )
                     file_path = os.path.join(root, filename)
 
                     try:
-                        spec = importlib.util.spec_from_file_location(full_module_name, file_path)
+                        spec = importlib.util.spec_from_file_location(
+                            full_module_name, file_path
+                        )
                         if spec is None:
-                            logger.log("warning", f"Could not create spec for {full_module_name} at {file_path}")
+                            logger.log(
+                                "warning",
+                                f"Could not create spec for {full_module_name} at {file_path}",
+                            )
                             continue
 
                         module = importlib.util.module_from_spec(spec)
@@ -80,11 +90,19 @@ class CrewFactory:
                         if spec.loader:
                             spec.loader.exec_module(module)
                         else:
-                            logger.log("error", f"Spec loader is None for module: {full_module_name}")
+                            logger.log(
+                                "error",
+                                f"Spec loader is None for module: {full_module_name}",
+                            )
                             continue
 
                         for attribute_name in dir(module):
                             attribute = getattr(module, attribute_name)
+                            crew_id = (
+                                    f"{current_package_path.replace('.', '_')}_{attribute_name.replace('Crew', '').lower()}"
+                                    if current_package_path
+                                    else attribute_name.replace("Crew", "").lower()
+                                )
                             if (
                                 isinstance(attribute, type)
                                 and attribute_name.endswith("Crew")
@@ -92,15 +110,18 @@ class CrewFactory:
                             ):
                                 crew_id = (
                                     f"{current_package_path.replace('.', '_')}_{attribute_name.replace('Crew', '').lower()}"
-                                    if current_package_path else
-                                    attribute_name.replace("Crew", "").lower()
+                                    if current_package_path
+                                    else attribute_name.replace("Crew", "").lower()
                                 )
 
                                 # Optional: crew_id = getattr(attribute, '_id', crew_id)
                                 cls.register_crew(crew_id, attribute)
 
                     except Exception as e:
-                        logger.log("error", f"Error importing {full_module_name} from {file_path}: {e}")
+                        logger.log(
+                            "error",
+                            f"Error importing {full_module_name} from {file_path}: {e}",
+                        )
 
     @classmethod
     def initialize(cls):
@@ -111,9 +132,12 @@ class CrewFactory:
         try:
             current_dir = os.path.dirname(__file__)
             project_root = os.path.dirname(current_dir)
-            crews_directory = os.path.join(project_root, 'crews')
+            crews_directory = os.path.join(project_root, "crews")
 
-            logger.log("info", f"Initializing CrewFactory. Looking for crews in: {crews_directory}")
+            logger.log(
+                "info",
+                f"Initializing CrewFactory. Looking for crews in: {crews_directory}",
+            )
             cls._discover_crews_from_directory(crews_directory)
             logger.log("info", "CrewFactory initialized successfully.")
         except Exception as e:

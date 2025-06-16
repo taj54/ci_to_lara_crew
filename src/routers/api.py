@@ -2,6 +2,7 @@ import humps
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from factories.centralized_crew_factory import CrewFactory
+from local_log.log import logger  
 
 from validation.migration_validator import MigrationValidator
 
@@ -30,7 +31,8 @@ def handle_action(query: Query, action: str, success_msg: str):
     result = validate_response.run()
     if not result.get("success"):
         raise HTTPException(status_code=422, detail=result.get("message"))
-    CrewClassName = humps.pascalize(SourceVersion.replace(".", "_")+"To"+TargetVersion.replace(".", "_")) + "Crew"
+    CrewClassName = humps.pascalize(SourceVersion.replace(".", "_")+"To"+TargetVersion.replace(".", "_"))
+    CrewClassName = CrewClassName.lower()
     crew = CrewFactory.get_crew(CrewClassName, Payload)
     if not crew:
         raise HTTPException(

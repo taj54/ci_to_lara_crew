@@ -4,3 +4,4 @@ __pycache__/
 
 poetry.lock
 report.md
+.pytest_cache/
