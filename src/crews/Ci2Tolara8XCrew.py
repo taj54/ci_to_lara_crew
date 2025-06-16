@@ -1,10 +1,9 @@
-#!/usr/bin/env python
 import sys
 import warnings
 
 from datetime import datetime
 
-from crews.CiToLaraCrew import CiToLaraCrew
+from base_crews.CiToLaraCrew import CiToLaraCrew
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
@@ -13,7 +12,7 @@ warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 # Replace with inputs you want to test with, it will automatically
 # interpolate any tasks and agents information
 class Ci2Tolara8XCrew():
-    def __init__(self,description="CiToLara8X Crew"):
+    def __init__(self,payload):
         """
         Initialize the Ci2Tolara8XCrew class.
         This class is designed to run the CiToLaraCrew with specific inputs.
@@ -22,7 +21,8 @@ class Ci2Tolara8XCrew():
             'topic': 'AI LLMs',
             'current_year': str(datetime.now().year)
         }
-        self.description = description
+        self.description = payload.get('topic', 'AI LLMs')
+        
 
     def run(self):
         """

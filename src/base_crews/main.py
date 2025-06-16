@@ -4,7 +4,7 @@ import warnings
 
 from datetime import datetime
 
-from crews.CiToLaraCrew import CiToLaraCrew
+from base_crews.CiToLaraCrew import CiToLaraCrew
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
