@@ -1,7 +1,6 @@
 .env
 __pycache__/
 .DS_Store
-
 poetry.lock
 report.md
 .pytest_cache/
