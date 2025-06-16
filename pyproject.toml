@@ -16,11 +16,11 @@ pyhumps = "3.8.0"
 pytest = "^8.4.0"
 
 [tool.poetry.scripts]
-ci_to_lara_crew = "ci_to_lara_crew.main:run"
-run_crew       = "ci_to_lara_crew.main:run"
-train          = "ci_to_lara_crew.main:train"
-replay         = "ci_to_lara_crew.main:replay"
-test           = "ci_to_lara_crew.main:test"
+ci_to_lara_crew = "crews.main:run"
+run_crew       = "crews.main:run"
+train          = "crews.main:train"
+replay         = "crews.main:replay"
+test           = "crews.main:test"
 
 [tool.crewai]
 type = "crew"

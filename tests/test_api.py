@@ -32,7 +32,7 @@ def test_successful_post(monkeypatch, client):
         "target_version": "lara_8.x",
         "inputs": {"description": "bar"},
     }
-    response = client.post("/ci-lara-ai-converter", json=payload)
+    response = client.post("/ci-lara-ai-converter/run", json=payload)
     assert response.status_code == status.HTTP_200_OK
     assert response.json()["success"] is True
     assert "Lara8XCrew crew executed successfully." in response.json()["message"]
@@ -66,7 +66,7 @@ def test_validator_failure(monkeypatch, client):
         "target_version": "lara_8.x",
         "inputs": {"description": ""},
     }
-    response = client.post("/ci-lara-ai-converter", json=payload)
+    response = client.post("/ci-lara-ai-converter/run", json=payload)
     assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
     assert (
         response.json()["detail"][0].get("msg") == "Migrate from CodeIgniter 2 to Laravel 8.x"
@@ -102,7 +102,7 @@ def test_missing_inputs(monkeypatch, client):
         "target_version": "lara_8.x",
         "inputs": "None",
     }
-    response = client.post("/ci-lara-ai-converter", json=payload)
+    response = client.post("/ci-lara-ai-converter/run", json=payload)
     assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
     assert (
         response.json()["detail"][0].get("msg") == "Input should be a valid dictionary"
@@ -116,6 +116,6 @@ def test_invalid_schema(client):
         "source_version": "ci2",
         # missing target_version and inputs
     }
-    response = client.post("/ci-lara-ai-converter", json=payload)
+    response = client.post("/ci-lara-ai-converter/run", json=payload)
     assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
     assert "target_version" in str(response.json())
