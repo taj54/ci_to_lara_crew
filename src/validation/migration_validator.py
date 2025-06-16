@@ -76,7 +76,7 @@ class MigrationValidator:
         return errors
 
     def run(self):
-        if self.payload is None:
+        if self.payload is None or not isinstance(self.payload, dict):
             return {
                 "success": False,
                 "message": [

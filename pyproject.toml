@@ -1,36 +1,32 @@
-[project]
+[tool.poetry]
 name = "ci_to_lara_crew"
 version = "0.1.0"
 description = "ci-to-lara-crew using crewAI"
-authors = [{ name = "Taj", email = "tajulislamj200@gmail.com" }]
-requires-python = ">=3.10.0,<3.12.5"
-dependencies = [
-    "crewai[tools]>=0.130.0,<1.0.0",
-    "uvicorn (>=0.29.0)",
-    "datetime (>=5.5)",
-    "python-dotenv (>=1.1.0,<2.0.0)",
-    "logging (>=0.4.9.6,<0.5.0.0)",
-    "fastapi (>=0.115.12,<0.116.0)",
-    "humps (>=0.2.2,<0.3.0)",
-    "decouple (>=0.0.7,<0.0.8)",
-]
+authors = ["Taj <tajulislamj200@gmail.com>"]
+packages = [{ include = "ci_to_lara_crew", from = "src" }]
 
-[project.scripts]
+[tool.poetry.dependencies]
+python = ">=3.10,<3.12.5"
+crewai = { version = ">=0.130.0,<1.0.0", extras = ["tools"] }
+uvicorn = "^0.29.0"
+fastapi = "^0.115.12"
+python-dotenv = "^1.1.0"
+decouple = "^0.0.7"
+pyhumps = "3.8.0"
+
+[tool.poetry.scripts]
 ci_to_lara_crew = "ci_to_lara_crew.main:run"
 run_crew = "ci_to_lara_crew.main:run"
 train = "ci_to_lara_crew.main:train"
 replay = "ci_to_lara_crew.main:replay"
 test = "ci_to_lara_crew.main:test"
 
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.4.0"
+
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
 
 [tool.crewai]
 type = "crew"
-
-[tool.poetry]
-packages = [{ include = "ci_to_lara_crew", from = "src" }]
-
-[tool.poetry.group.dev.dependencies]
-pytest = "^8.4.0"

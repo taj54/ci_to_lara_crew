@@ -1,5 +1,7 @@
+import os
 import humps
 from fastapi import APIRouter, HTTPException
+import humps
 from pydantic import BaseModel
 
 from validation.migration_validator import MigrationValidator
@@ -30,6 +32,7 @@ async def query_marketing_ai(query: Query):
     if result.get("success") == False:
         raise HTTPException(status_code=422, detail=result.get("message"))
     else:
+        TargetVersion = TargetVersion.replace(".", "_")
         CrewClassName = humps.pascalize(TargetVersion) + "Crew"
         # crew = globals()[CrewClassName](Payload)
         # response = crew.run()
