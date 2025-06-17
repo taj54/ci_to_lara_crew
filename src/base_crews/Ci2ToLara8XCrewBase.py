@@ -1,10 +1,19 @@
+import os
 from crewai import Agent, Crew, Process, Task
-from crewai.project import CrewBase, agent, crew, task
+from crewai.project import CrewBase, agent, crew, task, llm
 from crewai.agents.agent_builder.base_agent import BaseAgent
-from typing import List
+from typing import List, Optional
+from langchain_openai import ChatOpenAI
+from local_log.log import logger
 # If you want to run a snippet of code before or after the crew starts,
 # you can use the @before_kickoff and @after_kickoff decorators
 # https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
+os.environ["LITELLM_DEBUG"] = "true"
+os.environ["LITELLM_LOG_LEVEL"] = "DEBUG" 
+@llm
+def gpt4o_llm_config():
+    return ChatOpenAI(model="gpt-4o", temperature=0.1)
+
 
 @CrewBase
 class Ci2ToLara8XCrewBase():

@@ -2,7 +2,8 @@
     "ci_to_lara": {
         "ci2": {
             "lara_8.x": {
-                    "description": "Migrate from CodeIgniter 2 to Laravel 8.x"
+                    "model": "Describe your model ",
+                    "topic": "Migrate from CodeIgniter 2 to Laravel 8.x"
             },
             "lara_9.x": {},
             "lara_10.x": {}

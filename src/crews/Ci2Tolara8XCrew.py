@@ -3,7 +3,7 @@ import sys
 from datetime import datetime
 
 from base_crews.Ci2ToLara8XCrewBase import Ci2ToLara8XCrewBase
-
+from local_log.log import logger
 
 # This main file is intended to be a way for you to run your
 # crew locally, so refrain from adding unnecessary logic into this file.
@@ -16,10 +16,10 @@ class Ci2ToLara8XCrew():
         This class is designed to run the Ci2ToLara8XCrewBase with specific inputs.
         """
         self.inputs = {
-            'topic': 'AI LLMs',
+            'topic': payload.get('topic', 'AI LLMs'),
+            'model': payload.get('model'),
             'current_year': str(datetime.now().year)
         }
-        self.description = payload.get('topic', 'AI LLMs')
         
 
     def run(self):
