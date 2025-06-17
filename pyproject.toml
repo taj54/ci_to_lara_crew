@@ -15,12 +15,6 @@ decouple = "^0.0.7"
 pyhumps = "3.8.0"
 pytest = "^8.4.0"
 
-[tool.poetry.scripts]
-ci_to_lara_crew = "crews.main:run"
-run_crew       = "crews.main:run"
-train          = "crews.main:train"
-replay         = "crews.main:replay"
-test           = "crews.main:test"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.4.0"
