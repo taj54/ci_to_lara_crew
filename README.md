@@ -18,14 +18,16 @@
 ├── knowledge/
 │   └── user_preference.txt
 ├── src/
-│   ├── ci_to_lara_crew/
-│   │   ├── crew.py
+│   ├── base_crews/
+│   │   ├── Ci2ToLara8XCrewBase.py
 │   │   ├── main.py
 │   │   ├── config/
 │   │   │   ├── agents.yaml
 │   │   │   └── tasks.yaml
 │   │   └── tools/
 │   │       └── custom_tool.py
+│   ├── crews/
+│   │   └── Ci2Tolara8XCrew.py
 │   ├── routers/
 │   │   └── api.py
 │   ├── validation/
