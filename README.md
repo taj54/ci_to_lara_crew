@@ -114,7 +114,7 @@
 ### Installation
 
 ```sh
-poetry install --no-root
+python setup.py     ✅ One step setup!
 ```
 
 ### Running the Application 

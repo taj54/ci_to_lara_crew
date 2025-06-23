@@ -16,6 +16,10 @@ pyhumps = "3.8.0"
 pytest = "^8.4.0"
 langchain-ollama = "^0.3.3"
 
+[tool.poetry.scripts]
+key_generate = "tools.cli.key:generate"
+key_show = "tools.cli.key:show"
+key_verify = "tools.cli.key:verify"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.4.0"
