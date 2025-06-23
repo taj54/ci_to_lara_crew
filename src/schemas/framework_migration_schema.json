@@ -3,7 +3,7 @@
         "ci2": {
             "lara_8.x": {
                     "model": "Describe your model ",
-                    "topic": "Migrate from CodeIgniter 2 to Laravel 8.x"
+                    "migration_code": "CI code"
             },
             "lara_9.x": {},
             "lara_10.x": {}

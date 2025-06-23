@@ -1,17 +1,32 @@
-research_task:
+php_developer_task:
   description: >
-    Conduct a thorough research about {topic}
-    Make sure you find any interesting and relevant information given
-    the current year is {current_year}.
-  expected_output: >
-    A list with 10 bullet points of the most relevant information about {topic}
-  agent: researcher
+    You are given a legacy CodeIgniter controller method that needs to be migrated to Laravel {target_version}.
+    Ensure you use clean PHP {source_version} syntax and Laravel best practices such as Eloquent models,
+    resource controllers, and Blade views where appropriate.
 
-reporting_task:
-  description: >
-    Review the context you got and expand each topic into a full section for a report.
-    Make sure the report is detailed and contains any and all relevant information.
+    Legacy Code:
+    
+    {migration_code}
+
+    Your goal is to rewrite this code as a Laravel-compatible method or controller,
+    improving readability, modularity, and adherence to modern standards.
+    
   expected_output: >
-    A fully fledged report with the main topics, each with a full section of information.
-    Formatted as markdown without '```'
-  agent: reporting_analyst
+    A production-ready PHP code snippet or file using Laravel {target_version},
+    clean syntax, Eloquent ORM, and Laravel MVC structure.
+
+  agent: php_developer
+
+formatting_task:
+  description: >
+    You are tasked with formatting and linting the provided PHP code to ensure it adheres to PSR-12 standards
+    and Laravel best practices. This includes checking for proper indentation, spacing, and overall code quality.
+
+
+    Your goal is to produce a clean, consistent codebase that is easy to read and maintain.
+
+  expected_output: >
+    A formatted PHP code snippet or file that adheres to PSR-12 standards,
+    with consistent indentation, spacing, and no linting errors.
+
+  agent: formatting_agent

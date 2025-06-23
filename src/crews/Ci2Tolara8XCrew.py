@@ -16,9 +16,10 @@ class Ci2ToLara8XCrew():
         This class is designed to run the Ci2ToLara8XCrewBase with specific inputs.
         """
         self.inputs = {
-            'topic': payload.get('topic', 'AI LLMs'),
-            'model': payload.get('model'),
-            'current_year': str(datetime.now().year)
+        'source_version': payload.get('source_version'),
+        'target_version': payload.get('target_version'),
+        'migration_code': payload.get('migration_code'),
+        'model': payload.get('model'),
         }
         
 

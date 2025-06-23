@@ -28,12 +28,16 @@ def handle_action(query: Query, action: str, success_msg: str):
     TargetVersion = query.target_version
     Payload = query.inputs
     validate_response = MigrationValidator(MigrationDirection, SourceVersion, TargetVersion, Payload)
+
     result = validate_response.run()
     if not result.get("success"):
         raise HTTPException(status_code=422, detail=result.get("message"))
+
+
     CrewClassName = humps.pascalize(SourceVersion.replace(".", "_")+"To"+TargetVersion.replace(".", "_"))
     CrewClassName = CrewClassName.lower()
-    crew = CrewFactory.get_crew(CrewClassName, Payload)
+    newPayload = {**(Payload or {}), "source_version": SourceVersion, "target_version": TargetVersion}
+    crew = CrewFactory.get_crew(CrewClassName, newPayload)
     if not crew:
         raise HTTPException(
             status_code=422, detail="Crew not found or failed to instantiate."
