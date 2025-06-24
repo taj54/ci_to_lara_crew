@@ -12,12 +12,15 @@ def main():
     run(["poetry", "install"])
 
     env_path = Path(".env")
-    if not env_path.exists():
-        if Path(".env.example").exists():
-            print("📁 Creating .env from .env.example...")
-            copyfile(".env.example", ".env")
-        else:
-            print("⚠️  No .env or .env.example found. Skipping .env creation.")
+    example_path = Path(".env.example")
+
+    if not env_path.exists() and example_path.exists():
+        print("📁 Copying .env.example to .env...")
+        copyfile(example_path, env_path)
+    elif not example_path.exists():
+        print("⚠️  No .env.example found. Skipping .env creation.")
+    else:
+        print("✅ .env already exists.")
 
     print("🔐 Initializing APP_KEY...")
     run(["poetry", "run", "key_generate"])

@@ -1,9 +1,14 @@
 [tool.poetry]
 name = "ci_to_lara_crew"
-version = "0.1.0"
-description = "ci-to-lara-crew using crewAI"
+version = "1.0.1"
+description = "CI to Laravel crew migration using CrewAI"
 authors = ["Taj <tajulislamj200@gmail.com>"]
-packages = [{ include = "*", from = "src" }]
+
+# ✅ Package both `src/` (if used for main code) and `tools/` (for CLI + plugin)
+packages = [
+  { include = "src" },
+  { include = "tools" }
+]
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.12.5"
@@ -20,20 +25,21 @@ langchain-ollama = "^0.3.3"
 key_generate = "tools.cli.key:generate"
 key_show = "tools.cli.key:show"
 key_verify = "tools.cli.key:verify"
+setup = "tools.cli.setup:main"
+
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.4.0"
+cleo = "^2.1.0"
 
 [tool.crewai]
 type = "crew"
 
 [tool.pyright]
-# https://github.com/microsoft/pyright/blob/main/docs/configuration.md
 useLibraryCodeForTypes = true
 exclude = [".cache"]
 
 [tool.ruff]
-# https://beta.ruff.rs/docs/configuration/
 select = ["E", "W", "F", "I", "B", "C4", "ARG", "SIM"]
 ignore = ["W291", "W292", "W293"]
 
