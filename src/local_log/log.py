@@ -34,7 +34,6 @@ class Log:
             console_handler.setFormatter(logging.Formatter('%(levelname)s - %(message)s'))
             self.logger.addHandler(console_handler)
 
-        self.logger.debug("Logging initialized.")
 
     def log(self, level, msg):
         level = level.lower()

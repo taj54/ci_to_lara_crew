@@ -16,9 +16,9 @@ load_dotenv()  # Load environment variables from .env file
 AppURL = os.getenv("APP_URL")
 
 app = FastAPI(
-    title=os.getenv("APP_NAME"),
-    description=os.getenv("APP_DESCRIPTION"),
-    version=os.getenv("APP_VERSION"),
+    title=os.getenv("APP_NAME", "FastAPI Application"),
+    description=os.getenv("APP_DESCRIPTION", "A FastAPI application with CORS and token validation"),
+    version=os.getenv("APP_VERSION", "1.0.0"),
     dependencies=[Depends(get_token_header)],
     # servers=[
     #         {"url": "http://"+AppURL+":8000", "description": "Staging environment"},

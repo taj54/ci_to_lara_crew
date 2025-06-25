@@ -1,7 +1,7 @@
 import importlib.util
 import sys
 import os
-from local_log.log import logger  # Your custom logger
+from src.local_log.log import logger  # Your custom logger
 
 
 class CrewFactory:
@@ -24,7 +24,6 @@ class CrewFactory:
         if name in cls._crews:
             logger.log("warning", f"Crew '{name}' is already registered. Overwriting.")
         cls._crews[name] = crew_class
-        logger.log("info", f"Crew '{name}' registered successfully.")
 
     @classmethod
     def get_crew(cls, name, payload):
@@ -52,8 +51,6 @@ class CrewFactory:
         if not os.path.isdir(directory_path):
             logger.log("error", f"Directory '{directory_path}' not found.")
             return
-
-        logger.log("info", f"Starting recursive discovery in: {directory_path}")
 
         for root, _, files in os.walk(directory_path):
             relative_path = os.path.relpath(root, directory_path)
@@ -133,12 +130,8 @@ class CrewFactory:
             current_dir = os.path.dirname(__file__)
             project_root = os.path.dirname(current_dir)
             crews_directory = os.path.join(project_root, "crews")
-
-            logger.log(
-                "info",
-                f"Initializing CrewFactory. Looking for crews in: {crews_directory}",
-            )
+           
             cls._discover_crews_from_directory(crews_directory)
-            logger.log("info", "CrewFactory initialized successfully.")
+
         except Exception as e:
             logger.log("error", f"Failed to initialize CrewFactory: {e}")

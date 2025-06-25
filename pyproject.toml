@@ -4,7 +4,7 @@ version = "1.0.1"
 description = "CI to Laravel crew migration using CrewAI"
 authors = ["Taj <tajulislamj200@gmail.com>"]
 
-# ✅ Package both `src/` (if used for main code) and `tools/` (for CLI + plugin)
+# ✅ Package both `src/` (if used for main code) and `tools/` (for CLI )
 packages = [
   { include = "src" },
   { include = "tools" }

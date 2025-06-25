@@ -1,6 +1,6 @@
 import os
 import json
-from local_log.log import logger
+from src.local_log.log import logger
 
 
 class MigrationValidator:

@@ -1,10 +1,10 @@
 import humps
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from factories.centralized_crew_factory import CrewFactory
-from local_log.log import logger  
+from src.factories.centralized_crew_factory import CrewFactory
+from src.local_log.log import logger  
 
-from validation.migration_validator import MigrationValidator
+from src.validation.migration_validator import MigrationValidator
 
 router = APIRouter(
     prefix="/ci-lara-ai-converter",

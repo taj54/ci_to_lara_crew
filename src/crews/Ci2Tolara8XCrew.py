@@ -2,8 +2,8 @@ import sys
 
 from datetime import datetime
 
-from base_crews.Ci2ToLara8XCrewBase import Ci2ToLara8XCrewBase
-from local_log.log import logger
+from src.base_crews.Ci2ToLara8XCrewBase import Ci2ToLara8XCrewBase
+from src.local_log.log import logger
 
 # This main file is intended to be a way for you to run your
 # crew locally, so refrain from adding unnecessary logic into this file.
@@ -30,6 +30,7 @@ class Ci2ToLara8XCrew():
         try:
             Ci2ToLara8XCrewBase().crew().kickoff(inputs=self.inputs)
         except Exception as e:
+            logger.log('error', f"An error occurred while running the crew: {e}")
             raise Exception(f"An error occurred while running the crew: {e}")
 
 
