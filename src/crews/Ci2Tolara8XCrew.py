@@ -5,10 +5,7 @@ from datetime import datetime
 from src.base_crews.Ci2ToLara8XCrewBase import Ci2ToLara8XCrewBase
 from src.local_log.log import logger
 
-# This main file is intended to be a way for you to run your
-# crew locally, so refrain from adding unnecessary logic into this file.
-# Replace with inputs you want to test with, it will automatically
-# interpolate any tasks and agents information
+
 class Ci2ToLara8XCrew():
     def __init__(self,payload):
         """
@@ -21,7 +18,7 @@ class Ci2ToLara8XCrew():
         'migration_code': payload.get('migration_code'),
         'model': payload.get('model'),
         }
-        
+        self.train_data = payload.get('train_data', None)
 
     def run(self):
         """
@@ -33,20 +30,18 @@ class Ci2ToLara8XCrew():
             logger.log('error', f"An error occurred while running the crew: {e}")
             raise Exception(f"An error occurred while running the crew: {e}")
 
+    def train(self):
+        """
+        Train the crew for a given number of iterations.
+        """
+        try:
+            logger.log('info', f"Training crew with inputs: {self.train_data}")
 
-    # def train(self):
-    #     """
-    #     Train the crew for a given number of iterations.
-    #     """
-    #     inputs = {
-    #         "topic": "AI LLMs",
-    #         'current_year': str(datetime.now().year)
-    #     }
-    #     try:
-    #         Ci2ToLara8XCrewBase().crew().train(n_iterations=int(sys.argv[1]), filename=sys.argv[2], inputs=inputs)
+            # Ci2ToLara8XCrewBase().crew().train(n_iterations=int(sys.argv[1]), filename=sys.argv[2], inputs=self.inputs)
 
-    #     except Exception as e:
-    #         raise Exception(f"An error occurred while training the crew: {e}")
+        except Exception as e:
+            logger.log('error', f"An error occurred while training the crew: {e}")
+            raise Exception(f"An error occurred while training the crew: {e}")
 
     # def replay(self):
     #     """
