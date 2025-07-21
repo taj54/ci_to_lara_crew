@@ -136,7 +136,7 @@ poetry run pytest
 
 Please adhere to the existing code style and conventions. Before submitting any changes, ensure that all tests pass successfully.
 
-All contributions are subject to the terms outlined in the `LICENSE` file.
+All contributions are subject to the terms outlined in the [`LICENSE`](LICENSE) file.
 
 ## 11. Authors
 
