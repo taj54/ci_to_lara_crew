@@ -1,7 +1,5 @@
 # Developer Documentation: CI to Lara Crew
 
-**Version: v1.0.0**
-
 ## 1. Project Overview
 
 This document provides instructions for setting up, running, and developing the **CI to Lara Crew** application. The application is a Python-based tool that leverages CrewAI and FastAPI to facilitate and validate migrations from the CodeIgniter (CI) framework to Laravel (Lara). It features agent-based orchestration, schema-based validation, comprehensive logging, and an extensible architecture for adding new migration crews and tools.
